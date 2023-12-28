@@ -12,10 +12,20 @@ const INITAL_CARD_DATA = {
 
 function App() {
   const [cardData, setCardData] = useState(INITAL_CARD_DATA)
+  const [invalidInputs, setInvalidInputs] = useState<{ [k: string]: string | null }>({
+    cardholder: null,
+    cardNumber: null,
+    expMonth: null,
+    expYear: null,
+    cvc: null
+  })
 
   function handleFormSubmit(ev: FormEvent) {
     ev.preventDefault()
-    alert(JSON.stringify(cardData))
+    if (Object.values(invalidInputs).some((val) => val !== null)) {
+      alert('Faltan valores')
+      return
+    }
   }
 
   return (
@@ -34,11 +44,14 @@ function App() {
             id='cardholder'
             placeholder='e.g. Jane Appleseed'
             value={cardData.cardholder}
-            onChange={(ev) =>
+            onChange={(ev) => {
               setCardData((prev) => ({ ...prev, cardholder: ev.target.value }))
+              setInvalidInputs(prev => ({ ...prev, cardholder: ev.target.value.length === 0 ? "Can't be blank" : null }))
             }
-            className='border-darkGryishViolet rounded-md border-[1.5px] p-2 outline-none focus:border-darkViolet'
+            }
+            className={`border-darkGryishViolet rounded-md border-[1.5px] p-2 outline-none focus:border-darkViolet ${invalidInputs.cardholder && 'border-red-500'}`}
           />
+          {invalidInputs.cardholder && <span className='text-xs text-red-500'>{invalidInputs.cardholder}</span>}
         </div>
         <div className='flex flex-col gap-2'>
           <label htmlFor='cardnumber' className='text-sm'>CARD NUMBER</label>
@@ -51,61 +64,75 @@ function App() {
               // Remove non-numeric characters from the input
               const inputNumber = ev.target.value.replace(/\D|[\b]/g, '')
               setCardData((prev) => ({ ...prev, cardNumber: inputNumber }))
+              setInvalidInputs(prev => ({ ...prev, cardNumber: ev.target.value.length === 0 ? "Can't be blank" : null }))
             }}
             maxLength={16}
-            className='border-darkGryishViolet rounded-md border-[1.5px] p-2 outline-none focus:border-darkViolet'
+            className={`border-darkGryishViolet rounded-md border-[1.5px] p-2 outline-none focus:border-darkViolet ${invalidInputs.cardNumber && 'border-red-500'}`}
           />
+          {invalidInputs.cardNumber && <span className='text-xs text-red-500'>{invalidInputs.cardNumber}</span>}
         </div>
         <div className='flex gap-4'>
           <div className='flex flex-col gap-2'>
             <label htmlFor='expMonth' className='text-sm'>EXP. DATE (MM/YY)</label>
             <div className='flex gap-2'>
-              <input
-                type='text'
-                id='expMonth'
-                placeholder='MM'
-                value={cardData.expMonth}
-                onChange={(ev) => {
-                  setCardData((prev) => ({
-                    ...prev,
-                    expMonth: ev.target.value,
-                  }))
-                }
-                }
-                maxLength={2}
-                className='border-darkGryishViolet max-w-[4.25rem] rounded-md border-[1.5px] p-2 outline-none focus:border-darkViolet'
-              />
-              <input
-                type='text'
-                id='expYear'
-                placeholder='YY'
-                value={cardData.expYear}
-                onChange={(ev) =>
-                  setCardData((prev) => ({ ...prev, expYear: ev.target.value }))
-                }
-                maxLength={2}
-                className='border-darkGryishViolet max-w-[4.25rem] rounded-md border-[1.5px] p-2 outline-none focus:border-darkViolet'
-              />
+              <div className='flex flex-col gap-2'>
+                <input
+                  type='text'
+                  id='expMonth'
+                  placeholder='MM'
+                  value={cardData.expMonth}
+                  onChange={(ev) => {
+                    setCardData((prev) => ({
+                      ...prev,
+                      expMonth: ev.target.value,
+                    }))
+                    setInvalidInputs(prev => ({ ...prev, expMonth: ev.target.value.length === 0 ? "Can't be blank" : null }))
+                  }
+                  }
+                  maxLength={2}
+                  className={`border-darkGryishViolet max-w-[4.25rem] rounded-md border-[1.5px] p-2 outline-none focus:border-darkViolet ${invalidInputs.expMonth && 'border-red-500'}`}
+                />
+                {invalidInputs.expMonth && <span className='text-xs text-red-500'>{invalidInputs.expMonth}</span>}
+              </div>
+              <div className='flex flex-col gap-2'>
+                <input
+                  type='text'
+                  id='expYear'
+                  placeholder='YY'
+                  value={cardData.expYear}
+                  onChange={(ev) => {
+                    setCardData((prev) => ({ ...prev, expYear: ev.target.value }))
+                    setInvalidInputs(prev => ({ ...prev, expYear: ev.target.value.length === 0 ? "Can't be blank" : null }))
+                  }
+                  }
+                  maxLength={2}
+                  className={`border-darkGryishViolet max-w-[4.25rem] rounded-md border-[1.5px] p-2 outline-none focus:border-darkViolet ${invalidInputs.expMonth && 'border-red-500'}`}
+                />
+                {invalidInputs.expYear && <span className='text-xs block text-red-500'>{invalidInputs.expYear}</span>}
+              </div>
             </div>
           </div>
-          <div className='flex flex-col gap-2 self-end'>
+          <div className='flex flex-col gap-2'>
             <label htmlFor='cvc' className='text-sm'>CVC</label>
             <input
               type='text'
               id='cvc'
               placeholder='e.g. 123'
               value={cardData.cvc}
-              onChange={(ev) =>
+              onChange={(ev) => {
                 setCardData((prev) => ({ ...prev, cvc: ev.target.value }))
+                setInvalidInputs(prev => ({ ...prev, cvc: ev.target.value.length === 0 ? "Can't be blank" : null }))
+              }
               }
               maxLength={3}
-              className='border-darkGryishViolet w-full min-w-[5rem] rounded-md border-[1.5px] p-2 outline-none focus:border-darkViolet'
+              className={`border-darkGryishViolet w-full min-w-[5rem] rounded-md border-[1.5px] p-2 outline-none focus:border-darkViolet ${invalidInputs.cvc && 'border-red-500'}`}
             />
+            {invalidInputs.cvc && <span className='text-xs text-red-500'>{invalidInputs.cvc}</span>}
           </div>
         </div>
         <button
           type='submit'
-          className='block rounded-md bg-darkViolet py-2 text-white hover:opacity-95 focus:ring-4 focus:ring-violet-900 focus:ring-opacity-50 transition-all duration-300'
+          className='block rounded-md bg-darkViolet py-2 text-white hover:drop-shadow-xl hover:shadow-violet-900 focus:ring-4 focus:ring-violet-900 focus:ring-opacity-50 transition-all duration-300'
         >
           Confirm
         </button>
