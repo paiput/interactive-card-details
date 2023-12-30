@@ -63,7 +63,7 @@ function App() {
         <div className='mx-auto self-center'><div className='w-16 h-16 border-8 border-darkViolet rounded-full border-t-transparent animate-spin' /></div>
       ) : localStorage.getItem('cardDetails') !== null ? (
         <div className='font-spaceGrotesk w-full p-8 self-center mx-auto max-w-xs flex flex-col items-center gap-8'>
-          <img src='src/assets/images/icon-complete.svg' alt='Icon complete' />
+          <img src='./src/assets/images/icon-complete.svg' alt='Icon complete' />
           <div className='text-center'>
             <h3 className='text-darkViolet text-2xl mb-2'>THANK YOU!</h3>
             <p className='text-darkGrayishViolet'>We've added your card details</p>
