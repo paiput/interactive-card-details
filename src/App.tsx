@@ -24,6 +24,10 @@ function App() {
   function handleFormSubmit(ev: FormEvent) {
     let err = false
     ev.preventDefault()
+    Object.entries(cardData).forEach(([key, val]) => {
+      setInvalidInputs(prev => ({ ...prev, [key]: val.length === 0 ? "Can't be blank" : null }))
+      if (val.length === 0) err = true
+    })
     if (cardData.cardNumber.length !== 16) {
       err = true
       setInvalidInputs(prev => ({ ...prev, cardNumber: "Must be 16 digits" }))
@@ -40,10 +44,6 @@ function App() {
       setInvalidInputs(prev => ({ ...prev, expYear: "Invalid year" }))
       err = true
     }
-    Object.entries(cardData).forEach(([key, val]) => {
-      setInvalidInputs(prev => ({ ...prev, [key]: val.length === 0 ? "Can't be blank" : null }))
-      err = true
-    })
     if (err) return
     setIsLoading(true)
     setTimeout(() => {
