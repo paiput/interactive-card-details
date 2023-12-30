@@ -54,8 +54,10 @@ function App() {
 
   return (
     <div className='flex flex-col md:flex-row'>
-      <div className='md:flex md:items-center p-6 md:bg-bgMainDesktop md:h-screen bg-bgMainMobile bg-no-repeat bg-cover'>
-        <Card data={cardData} />
+      <div className='mb-24 md:mb-0 md:flex md:items-center p-12 md:p-6 md:bg-bgMainDesktop md:h-screen bg-bgMainMobile bg-no-repeat bg-cover lg:max-w-md'>
+        <div className='flex justify-center mx-auto lg:translate-x-[50%]'>
+          <Card data={cardData} />
+        </div>
       </div>
       {isLoading ? (
         <div className='mx-auto self-center'><div className='w-16 h-16 border-8 border-darkViolet rounded-full border-t-transparent animate-spin' /></div>
@@ -80,7 +82,7 @@ function App() {
       ) : (
         <form
           onSubmit={handleFormSubmit}
-          className='flex max-w-fit self-center md:mx-auto p-6 flex-col gap-3 font-spaceGrotesk text-darkViolet font-extrabold'
+          className='flex max-w-[400px] self-center md:mx-auto p-6 flex-col gap-3 font-spaceGrotesk text-darkViolet font-extrabold'
         >
           <div className='flex flex-col gap-2'>
             <label htmlFor='cardholder' className='text-sm'>CARDHOLDER NAME</label>
