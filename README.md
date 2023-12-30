@@ -28,11 +28,11 @@ Users should be able to:
 
 ### Screenshot
 
-![](./src\assets\images\screenshot.png)
+![](./public/assets/images/screenshot.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: https://www.frontendmentor.io/solutions/interactive-card-details-qXvqia44V1
 - Live Site URL: https://astonishing-stroopwafel-9d5f97.netlify.app/
 
 ## My process

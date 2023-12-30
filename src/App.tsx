@@ -53,16 +53,17 @@ function App() {
   }
 
   return (
-    <div className='flex flex-col md:flex-row'>
-      <div className='mb-24 md:mb-0 md:flex md:items-center p-12 md:p-6 md:bg-bgMainDesktop md:h-screen bg-bgMainMobile bg-no-repeat bg-cover lg:max-w-md'>
+    <main className='flex flex-col md:flex-row'>
+      <h1 className='hidden'>Card details form</h1>
+      <section className='mb-24 md:mb-0 md:flex md:items-center p-12 md:p-6 md:bg-bgMainDesktop md:h-screen bg-bgMainMobile bg-no-repeat bg-cover lg:max-w-md'>
         <div className='flex justify-center mx-auto lg:translate-x-[50%]'>
           <Card data={cardData} />
         </div>
-      </div>
+      </section>
       {isLoading ? (
         <div className='mx-auto self-center'><div className='w-16 h-16 border-8 border-darkViolet rounded-full border-t-transparent animate-spin' /></div>
       ) : localStorage.getItem('cardDetails') !== null ? (
-        <div className='font-spaceGrotesk w-full p-8 self-center mx-auto max-w-xs flex flex-col items-center gap-8'>
+        <section className='font-spaceGrotesk w-full p-8 self-center mx-auto max-w-xs flex flex-col items-center gap-8'>
           <img src='/assets/images/icon-complete.svg' alt='Icon complete' />
           <div className='text-center'>
             <h3 className='text-darkViolet text-2xl mb-2'>THANK YOU!</h3>
@@ -78,7 +79,7 @@ function App() {
           >
             Continue
           </button>
-        </div>
+        </section>
       ) : (
         <form
           onSubmit={handleFormSubmit}
@@ -183,7 +184,7 @@ function App() {
           </button>
         </form>
       )}
-    </div>
+    </main>
   )
 }
 
