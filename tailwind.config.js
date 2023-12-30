@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        bgMainMobile: 'url("./src/assets/images/bg-main-mobile.png")',
-        bgMainDesktop: 'url("./src/assets/images/bg-main-desktop.png")',
+        bgMainMobile: 'url("/assets/images/bg-main-mobile.png")',
+        bgMainDesktop: 'url("/assets/images/bg-main-desktop.png")',
       },
       colors: {
         lightGrayishViolet: 'var(--light-grayish-violet)',
